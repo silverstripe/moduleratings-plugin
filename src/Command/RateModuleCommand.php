@@ -4,7 +4,11 @@ namespace SilverStripe\ModuleRatingsPlugin\Command;
 
 use Composer\Command\BaseCommand;
 use InvalidArgumentException;
+use SilverStripe\ModuleRatings\Check;
 use SilverStripe\ModuleRatings\CheckSuite;
+use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -58,9 +62,36 @@ TEXT
             $checkSuite->setRepositorySlug($slug);
         }
 
-        $checkSuite->run();
+        // Get a callback we can use to monitor the check suite progress
+        $progressBar = new ProgressBar($output, count($checkSuite->getChecks()));
+        $progressBar->setFormatDefinition('checksuite', '  %current%/%max% [%bar%] %message%');
+        $progressBar->setFormat('checksuite');
+        $progressBar->setMessage('Loading check suite...');
+        $progressBar->start();
+        $callback = $this->getCheckCallback($progressBar);
 
-        var_dump($checkSuite->getScore()  . ' out of 100');
-        print_r($checkSuite->getCheckDetails());
+        $checkSuite->run($callback);
+
+        $progressBar->finish();
+        $progressBar->clear();
+
+        $tableRows = $checkSuite->getCheckDetails();
+        $tableRows[] = new TableSeparator();
+        $tableRows[] = ['TOTAL SCORE', $checkSuite->getScore(), '100'];
+
+        $table = new Table($output);
+        $table
+            ->setHeaders(['Check description', 'Points', 'Maximum'])
+            ->setRows($tableRows);
+        $table->render();
+    }
+
+    protected function getCheckCallback(ProgressBar $progressBar)
+    {
+        return function (Check $check, callable $delegate) use ($progressBar) {
+            $progressBar->setMessage('Running check: ' . $check->getKey());
+            $delegate();
+            $progressBar->advance();
+        };
     }
 }
