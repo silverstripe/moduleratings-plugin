@@ -3,6 +3,7 @@
     "description": "A Composer plugin to provide ability to rate your local modules",
     "type": "composer-plugin",
     "require": {
+        "silverstripe/moduleratings": "^1@dev",
         "composer-plugin-api": "^1.1"
     },
     "require-dev": {
