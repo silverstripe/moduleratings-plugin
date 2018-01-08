@@ -38,9 +38,9 @@ This command will assess the provided module based on a selection of pre-defined
 out of 100.
 
 You must provide the <info>module-path</info> to map the path from the current working directory to the source code
-of the module, and you may optionally provide the "github-slug" argument which will enable API based status checks.
+of the module, and you may optionally provide the <info>slug</info> argument which will enable API based status checks.
 
-Note that without providing <info>github-slug</info> the module will never be able to achieve a 100% score.
+Note that without providing <info>slug</info> the module will never be able to achieve a 100% score.
 TEXT
         );
     }
@@ -77,7 +77,7 @@ TEXT
 
         $tableRows = $checkSuite->getCheckDetails();
         $tableRows[] = new TableSeparator();
-        $tableRows[] = ['TOTAL SCORE', $checkSuite->getScore(), '100'];
+        $tableRows[] = ['TOTAL SCORE (normalised)', $checkSuite->getScore(), '100'];
 
         $table = new Table($output);
         $table
