@@ -1,5 +1,7 @@
 # SilverStripe module ratings plugin
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/silverstripe/moduleratings-plugin/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/silverstripe/moduleratings-plugin/?branch=master)
+
 This package provides a [Composer plugin](https://github.com/silverstripe/silverstripe-contentreview/issues/74) which
 enables the functionality for the SilverStripe module ratings package to be used via Composer on the command line.
 
@@ -82,7 +84,7 @@ $ composer rate-module vendor/silverstripe/spamprotection/ --slug=silverstripe/s
 ```
 
 In the above example you will see the results of each of 
-[the checks](https://github.com/creative-commoners/moduleratings#available-checks), with the Points that were 
+[the checks](https://github.com/silverstripe/moduleratings#available-checks), with the Points that were 
 awarded for meeting the check's criteria, and the maximum potential points that could be attained from the check if it
 were successful.
 
@@ -92,4 +94,4 @@ rather than 64/66 (if you'd added each check result up).
 ## Further info on the checks
 
 For more information on the check suite itself, please see the
-[module ratings package](https://github.com/creative-commoners/moduleratings). 
+[module ratings package](https://github.com/silverstripe/moduleratings). 
