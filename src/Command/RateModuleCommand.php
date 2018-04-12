@@ -47,6 +47,10 @@ TEXT
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        // Ensure autoloader is included
+        $vendorDir = $this->getComposer()->getConfig()->get('vendor-dir');
+        require_once $vendorDir . '/autoload.php';
+
         $modulePath = $input->getArgument('module-path');
         if (empty($modulePath) || !file_exists($modulePath)) {
             throw new InvalidArgumentException('Provided module path "' . $modulePath . '" does not exist!');
