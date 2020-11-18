@@ -1,6 +1,11 @@
 inherit: true
 
 build:
+  dependencies:
+    before:
+      - 'cp /usr/bin/composer.phar ~/bin/composer && chmod +x ~/bin/composer'
+      - 'composer self-update --2'
+
   nodes:
     analysis:
       tests:
