@@ -15,6 +15,16 @@ class RatingsPlugin implements PluginInterface, Capable
         // noop
     }
 
+    public function deactivate(Composer $composer, IOInterface $io)
+    {
+        // noop
+    }
+
+    public function uninstall(Composer $composer, IOInterface $io)
+    {
+        // noop
+    }
+
     public function getCapabilities()
     {
         return [
