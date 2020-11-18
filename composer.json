@@ -4,10 +4,11 @@
     "type": "composer-plugin",
     "require": {
         "silverstripe/moduleratings": "^1@dev",
-        "composer-plugin-api": "^1.1"
+        "composer-plugin-api": "^2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^5.7"
+        "phpunit/phpunit": "^5.7",
+        "composer/composer": "^2"
     },
     "license": "BSD-3-Clause",
     "authors": [
